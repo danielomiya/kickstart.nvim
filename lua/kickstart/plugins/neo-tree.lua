@@ -1,15 +1,15 @@
 -- Neo-tree is a Neovim plugin to browse the file system
 -- https://github.com/nvim-neo-tree/neo-tree.nvim
 
-local function open_nvim_tree(data)
-  local dir = vim.fn.isdirectory(data.file) == 1
+local function open_neotree(data)
+  local is_dir = vim.fn.isdirectory(data.file) == 1
 
-  if not dir then
+  if not is_dir then
     return
   end
 
   vim.cmd.cd(data.file)
-  require('nvim-tree.api').tree.open()
+  vim.cmd('Neotree reveal left')
 end
 
 return {
@@ -25,6 +25,7 @@ return {
   keys = {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
+  lazy = false,
   config = function()
     local opts = {
       hide_root_node = true,
@@ -50,6 +51,6 @@ return {
     opts.nesting_rules = require('neotree-file-nesting-config').nesting_rules
     require('neo-tree').setup(opts)
 
-    vim.api.nvim_create_autocmd('VimEnter', { callback = open_nvim_tree })
+    vim.api.nvim_create_autocmd('VimEnter', { callback = open_neotree })
   end,
 }
