@@ -1,4 +1,4 @@
---[[
+--[[init
 What is Kickstart?
 
   Kickstart.nvim is *not* a distribution.
@@ -62,6 +62,7 @@ vim.g.have_nerd_font = true
 -- Disable netrw since we're using nvim-tree
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.opt.termguicolors = true
 
 -- [[ Setting options ]]
 -- See `:help vim.opt`
